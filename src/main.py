@@ -1,9 +1,8 @@
 import methods
 
+methods.initializeMask()
+methods.displayMask()
 
-
-print(methods.rowMask(0))
-print(methods.columnMask(2))
 boardBinary = []
 
 
@@ -16,5 +15,3 @@ boardBinary = []
 #         else:
 #             temp.append(0)
 #     boardBinary.append(temp)
-
-
