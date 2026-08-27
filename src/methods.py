@@ -23,6 +23,15 @@ class Sudoku:
 s = Sudoku()
 
 
+def isValid(row, col):
+    if (row>=9 or col>=9):
+        return False
+    elif (row<0 or col<0):
+        return False 
+
+    return True
+    
+
 
 def rowMask(row):
     mask = 0
