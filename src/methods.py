@@ -13,7 +13,6 @@ class Sudoku:
         [0, 0, 0, 4, 1, 9, 0, 0, 5],
         [0, 0, 0, 0, 8, 0, 0, 7, 9],
     ]
-
     rowMaskValues = []
     columnMaskValues = []
     gridMaskValues = []
@@ -31,7 +30,23 @@ def isValid(row, col):
 
     return True
     
+def nextEmptySpace(board):
+    for i in range(9):
+        for j in range(9):
+            if board[i][j] == 0:
+                return (i,j)
+    return -1
+    
+# def isValidNumber(row , col , num):
+#     if isValid(row , col):
+#         if s.rowMaskValues[row] & num :
+#             return False
+#         elif s.columnMaskValues[col] & num:
+#             return False
+#         elif row < 3 and col < 3:
+#             if s.gridMaskValues[0] & num:
 
+#     return False
 
 def rowMask(row):
     mask = 0
