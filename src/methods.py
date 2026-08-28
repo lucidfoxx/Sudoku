@@ -1,6 +1,7 @@
 # imports
 
 import sys
+import time
 
 sys.setrecursionlimit(1000000000)
 # class
@@ -128,7 +129,7 @@ def solve(tboard):
         return tboard
 
     for i in range(1, 10):
-        updateMask(tboard)   
+        updateMask(tboard)
         if isValidNumber(row, col, i):
             tboard[row][col] = i
             result = solve(tboard)
@@ -138,5 +139,12 @@ def solve(tboard):
     return [[]]
 
 
-sboard = solve(boardCopy)
-displaySudoku(sboard)
+def solveSudoku(board):
+    startTime = time.time()
+    sboard = solve(board)
+    endTime = time.time()
+    displaySudoku(sboard)
+    print(f"Solved in : {endTime-startTime} seconds")
+
+
+solveSudoku(boardCopy)
