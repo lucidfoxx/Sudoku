@@ -2,7 +2,7 @@
 
 import sys
 
-sys.setrecursionlimit(100000)
+sys.setrecursionlimit(1000000000)
 # class
 
 
@@ -45,11 +45,11 @@ def nextEmptySpace(board):
 
 def isValidNumber(row, col, num):
     if isValid(row, col):
-        if rowMaskValues[row] & num:
+        if rowMaskValues[row] & 1 << (num - 1):
             return False
-        elif columnMaskValues[col] & num:
+        elif columnMaskValues[col] & 1 << (num - 1):
             return False
-        elif gridMaskValues[(row // 3) * 3 + col // 3] & num:
+        elif gridMaskValues[(row // 3) * 3 + col // 3] & 1 << (num - 1):
             return False
         return True
     return False
@@ -114,8 +114,8 @@ def displayMask():
 def displaySudoku(board):
     for x in board:
         for y in x:
-            print(y , end=" ")
-    print()
+            print(y, end=" ")
+        print()
 
 
 # Solver
@@ -127,13 +127,15 @@ def solve(tboard):
     print(row, col)
     if row == -1:
         return tboard
+
     for i in range(1, 10):
         if isValidNumber(row, col, i):
             tboard[row][col] = i
             displaySudoku(tboard)
             print("------")
-            solve(tboard)
-            tboard[row][col] = 0
+            result = solve(tboard)
+            if result == [[]]:
+                tboard[row][col] = 0
     return [[]]
 
 
