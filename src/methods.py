@@ -124,20 +124,19 @@ def displaySudoku(board):
 def solve(tboard):
     updateMask(tboard)
     row, col = nextEmptySpace(tboard)
-    print(row, col)
     if row == -1:
         return tboard
 
     for i in range(1, 10):
         if isValidNumber(row, col, i):
             tboard[row][col] = i
-            displaySudoku(tboard)
-            print("------")
             result = solve(tboard)
-            if result == [[]]:
-                tboard[row][col] = 0
+            if result != [[]] and result is not None:
+                return result
+            tboard[row][col] = 0
     return [[]]
 
 
 sboard = solve(boardCopy)
+print(sboard)
 displaySudoku(sboard)
