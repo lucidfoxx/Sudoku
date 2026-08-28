@@ -23,30 +23,33 @@ s = Sudoku()
 
 
 def isValid(row, col):
-    if (row>=9 or col>=9):
+    if row >= 9 or col >= 9:
         return False
-    elif (row<0 or col<0):
-        return False 
+    elif row < 0 or col < 0:
+        return False
 
     return True
-    
+
+
 def nextEmptySpace(board):
     for i in range(9):
         for j in range(9):
             if board[i][j] == 0:
-                return (i,j)
+                return (i, j)
     return -1
-    
-# def isValidNumber(row , col , num):
-#     if isValid(row , col):
-#         if s.rowMaskValues[row] & num :
-#             return False
-#         elif s.columnMaskValues[col] & num:
-#             return False
-#         elif row < 3 and col < 3:
-#             if s.gridMaskValues[0] & num:
 
-#     return False
+
+def isValidNumber(row, col, num):
+    if isValid(row, col):
+        if s.rowMaskValues[row] & num:
+            return False
+        elif s.columnMaskValues[col] & num:
+            return False
+        elif s.gridMaskValues[(row // 3) * 3 + col // 3] & num:
+            return False
+        return True
+    return False
+
 
 def rowMask(row):
     mask = 0
@@ -88,16 +91,19 @@ def gridMask(gridIndex):
 def getShadow():
     pass
 
+
 def initializeMask():
     for i in range(9):
-        s.rowMaskValues.append(rowMask(i))  
+        s.rowMaskValues.append(rowMask(i))
         s.columnMaskValues.append(columnMask(i))
         s.gridMaskValues.append(gridMask(i))
+
 
 def displayMask():
     print(s.rowMaskValues)
     print(s.columnMaskValues)
     print(s.gridMaskValues)
+
 
 def displaySudoku(board):
     for x in board:
