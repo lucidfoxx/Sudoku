@@ -128,6 +128,7 @@ def solve(tboard):
         return tboard
 
     for i in range(1, 10):
+        updateMask(tboard)   
         if isValidNumber(row, col, i):
             tboard[row][col] = i
             result = solve(tboard)
@@ -138,5 +139,4 @@ def solve(tboard):
 
 
 sboard = solve(boardCopy)
-print(sboard)
 displaySudoku(sboard)
